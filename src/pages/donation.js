@@ -147,9 +147,3 @@ const Donation = () => {
 };
 
 export default Donation;
-{
-  /*
-https://unsplash.com/fr/photos/cinq-enfants-souriant-tout-en-faisant-le-signe-de-la-main-de-la-paix-AEaTUnvneik
-,https://unsplash.com/fr/photos/femme-en-t-shirt-blanc-et-jean-bleu-assis-sur-une-boite-en-carton-marron-A4Ax1ApccfA
-*/
-}
