@@ -20,6 +20,7 @@ const Footer = () => {
     { label: "Politique de confidentialité", path: "/privacy" },
     { label: "CGV", path: "/cgv" },
     { label: "Contact", path: "/contact" },
+    { label: "Team", path: "/aboutus" }
   ];
   const shop = [
     { label: "Panier", path: "/shoppingBag" },
@@ -71,7 +72,7 @@ const Footer = () => {
               aria-labelledby="nested-list-subheader"
               subheader={
                 <ListSubheader component="div" id="nested-list-subheader" sx={{ bgcolor: "transparent",color:"#FFFFFF"}}>
-                  Liens Utils
+                  Liens Utiles
                   <Divider />
                 </ListSubheader>
               }>

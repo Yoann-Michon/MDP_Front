@@ -295,7 +295,7 @@ const Home = () => {
           Envie de rejoindre l'équipe ?
         </Typography>
         <Box sx={{display: 'flex', justifyContent: 'space-around',minWidth:400, width:"100%", alignItems:"center",flexDirection:{xs: "column", md: "row"}}}>
-          <InstagramEmbed url="https://www.instagram.com/p/CUbHfhpswxt/" width={400} />
+          <InstagramEmbed url="https://www.instagram.com/p/CUbHfhpswxt/" style={{maxWidth:"400px",width:"100%"}} />
           <blockquote className="tiktok-embed" cite="https://www.tiktok.com/@epicgardening/video/7055411162212633903" data-video-id="7055411162212633903" id="v88922974113346340" style={{ height: "625px", width: "323px", margin: "0" }}>
   <iframe
     title="TikTok Video"
