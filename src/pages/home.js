@@ -296,9 +296,16 @@ const Home = () => {
         </Typography>
         <Box sx={{display: 'flex', justifyContent: 'space-around',minWidth:400, width:"100%", alignItems:"center",flexDirection:{xs: "column", md: "row"}}}>
           <InstagramEmbed url="https://www.instagram.com/p/CUbHfhpswxt/" width={400} />
-          <blockquote className="tiktok-embed" cite="https://www.tiktok.com/@epicgardening/video/7055411162212633903" data-video-id="7055411162212633903" id="v88922974113346340" style={{height:"625px",width: "323px",margin:"0"}}>
-              <iframe name="__tt_embed__v88922974113346340" sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-top-navigation allow-same-origin" src="https://www.tiktok.com/embed/v2/7055411162212633903" style={{ "visibility": "unset"}}></iframe>
-          </blockquote>
+          <blockquote className="tiktok-embed" cite="https://www.tiktok.com/@epicgardening/video/7055411162212633903" data-video-id="7055411162212633903" id="v88922974113346340" style={{ height: "625px", width: "323px", margin: "0" }}>
+  <iframe
+    title="TikTok Video"
+    name="__tt_embed__v88922974113346340"
+    sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-top-navigation allow-same-origin"
+    src="https://www.tiktok.com/embed/v2/7055411162212633903"
+    style={{ "visibility": "unset" }}
+  ></iframe>
+</blockquote>
+
         </Box>
       </Container>
     </div>

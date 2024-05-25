@@ -62,7 +62,6 @@ const Shop = () => {
 
   const FileUpload = async (e) => {
     const file = e.target.files[0];
-    const base64 = await convertToBase64(file);
     setNewProduct({ ...newProduct, locationImg: file });
   };
 
@@ -73,7 +72,7 @@ const Shop = () => {
       formData.append("image", newProduct.locationImg);
   
       // Envoyer l'image à imgbb
-      const imgbbResponse = await fetch(`https://api.imgbb.com/1/upload?expiration=0&key=3103e1195e4a8ec764ab7c107b710185`, {
+      const imgbbResponse = await fetch(`https://api.imgbb.com/1/upload?expiration=0&key=${process.env.IMGBB_KEY}`, {
         method: "POST",
         body: formData
       });

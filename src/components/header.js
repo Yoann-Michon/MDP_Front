@@ -72,7 +72,7 @@ const Header = () => {
           </Typography>
         </Box>
         
-        <Box sx={{ display: { xs: "none", md: "flex" }, flexGrow: 1, justifyContent: "center", maxWidth: "500px",justifyContent:"space-around"}}>
+        <Box sx={{ display: { xs: "none", md: "flex" }, flexGrow: 1, maxWidth: "500px",justifyContent:"space-around"}}>
           {navLinks.map((link, index) => (
             <Button key={index} color="info" component={NavLink} to={link.path}>
               {link.label}
