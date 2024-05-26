@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography , Box} from "@mui/material";
 
 import Dana from "./../assets/avatars/dana.svg";
 import Ines from "./../assets/avatars/ines.svg";
@@ -56,7 +56,7 @@ const AboutUs = () => {
         </Typography>
         <section style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
           {team.map((member, index) => (
-            <section key={index} style={{ display: "flex", alignItems: "center", margin: "30px" }}>
+            <Box key={index} sx={{ display: "flex", alignItems: "center", margin: "30px",flexDirection:{xs:"column",md:"row"}}}>
               <img src={member.image} alt={member.name} style={{ marginRight: "20px", width: "200px", height: "200px" }} />
               <div>
                 <Typography variant="h5" gutterBottom>
@@ -66,7 +66,7 @@ const AboutUs = () => {
                   {member.description}
                 </Typography>
               </div>
-            </section>
+            </Box>
           ))}
         </section>
       </div>
