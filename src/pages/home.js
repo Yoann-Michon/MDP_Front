@@ -16,9 +16,8 @@ import ornella from "../assets/avatars/ornella.svg";
 import ines from "../assets/avatars/ines.svg";
 import yoann from "../assets/avatars/yoann.svg";
 import tiktok from "../assets/img/tiktok_ujdp.jpg";
-import { InstagramEmbed } from 'react-social-media-embed';
+import { InstagramEmbed } from "react-social-media-embed";
 import "./style/home.css";
-
 
 const Home = () => {
   const avatars = [
@@ -72,7 +71,6 @@ const Home = () => {
         </Box>
       </div>
       <DonationCards />
-
       <Divider sx={{ my: 5 }}>
         <Chip
           label="Situation"
@@ -232,7 +230,7 @@ const Home = () => {
           src={te}
           alt="Second Image"
           sx={{
-            maxWidth: "700px",
+            maxWidth: "100%",
             height: "300px",
             objectFit: "cover",
           }}
@@ -244,7 +242,6 @@ const Home = () => {
           sx={{ bgcolor: "#7ED957", color: "#FFFFFF", fontSize: "20px" }}
         />
       </Divider>
-
       <Box
         sx={{
           display: "flex",
@@ -292,27 +289,63 @@ const Home = () => {
           </Card>
         ))}
       </Box>
-      <Container component="div" id="network" sx={{display: 'flex', justifyContent: 'center',flexDirection:"column",width:"100%",my:5}}>
-        <Typography variant="h4" component="h4" sx={{ display: 'flex', justifyContent: 'center',maxHeight:{md:"600px" },mb:5}}>
+      <Container
+        component="div"
+        id="network"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          width: "100%",
+          my: 5,
+        }}
+      >
+        <Typography
+          variant="h4"
+          component="h4"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            maxHeight: { md: "600px" },
+            mb: 5,
+          }}
+        >
           Envie de rejoindre l'équipe ?
         </Typography>
-        <Box sx={{display: 'flex', justifyContent: 'space-around',minWidth:400, width:"100%", alignItems:"center",flexDirection:{xs: "column", md: "row"}}}>
-          <InstagramEmbed url="https://www.instagram.com/p/C68MGQbNtdj/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" style={{maxWidth:"400px",width:"100%", aspectRatio: 1}} />
-          <a href="https://www.tiktok.com/@_unjourdepaix?_t=8mfW2K3MuRt&_r=1" target="_blank" rel="noopener noreferrer">
-          <Box
-          component="img"
-          src={tiktok}
-          alt="tiktok account image"
+        <Box
           sx={{
-            maxWidth: "400px",
-            width:"100%",
-            border:"1px solid #80808075",
-            objectFit: "cover",
+            display: "flex",
+            justifyContent: "space-around",
+            width: "100%",
+            alignItems: "center",
+            flexDirection: { xs: "column", md: "row" },
+            "& > *": { margin: "20px" },
           }}
-        />
-        </a>
-      </Box>
+        >
+          <InstagramEmbed
+            url="https://www.instagram.com/p/C68MGQbNtdj/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA=="
+            style={{ maxWidth: "400px", width: "100%", aspectRatio: 1 }}
+          />
+          <a
+            href="https://www.tiktok.com/@_unjourdepaix?_t=8mfW2K3MuRt&_r=1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Box
+              component="img"
+              src={tiktok}
+              alt="tiktok account image"
+              sx={{
+                maxWidth: "400px",
+                width: "100%",
+                border: "1px solid #80808075",
+                objectFit: "cover",
+              }}
+            />
+          </a>
+        </Box>
       </Container>
+      ;
     </div>
   );
 };

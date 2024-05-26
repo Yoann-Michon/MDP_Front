@@ -29,7 +29,7 @@ const Footer = () => {
   ];
   return (
     <footer style={{ backgroundColor: "#7ED957"}}>
-      <Container>
+      <Container sx={{width:"100%"}}>
         <Box
           sx={{
             display: "flex",
@@ -38,7 +38,7 @@ const Footer = () => {
             justifyContent: "space-between",
             py: 2,
           }}>
-          <Box sx={{ display: "flex", alignItems: "center", width: "400px",
+          <Box sx={{ display: "flex", alignItems: "center", width: "100%",
             justifyContent: "space-between",ml:2,mb:{xs: 3}, flexDirection: { xs: "column", md: "row" }}}>
             <Box
               component="img"
@@ -46,7 +46,8 @@ const Footer = () => {
               alt="First Image"
               sx={{
                 mr: 2,
-                width: "200px",
+                width:"100%",
+                maxWidth: "200px",
               }}
             />
             <Box>
@@ -62,12 +63,15 @@ const Footer = () => {
               </Typography>
             </Box>
           </Box>
-          <Box sx={{ display: "flex", flexDirection: "row", gap: { xs: 2, sm: 3, md: 5 } , color:"#FFFFFF"}}>
+          <Box sx={{ display: "flex", flexDirection:{xs:"column" ,md:"row"}, gap: { xs: 2, sm: 3, md: 5 } , color:"#FFFFFF"}}>
             <List
-              sx={{ maxWidth: 360, bgcolor: "transparent", display: "flex",
+              sx={{ bgcolor: "transparent", display: "flex",
               flexDirection:"column",
               alignItems: "center",
-              minWidth:200 }}
+              width: {
+                sx: "100%", 
+                md: "360px"
+              }}}
               component="nav"
               aria-labelledby="nested-list-subheader"
               subheader={
@@ -90,10 +94,14 @@ const Footer = () => {
             </List>
             <Divider orientation="vertical" variant="middle" flexItem />
             <List
-              sx={{ maxWidth: 360, bgcolor: "transparent",display: "flex",
+              sx={{  bgcolor: "transparent",display: "flex",
               flexDirection:"column",
               alignItems: "center",
-            minWidth:200 }}
+              width: {
+                sx: "100%", 
+                md: "360px"
+              }
+            }}
               component="nav"
               aria-labelledby="nested-list-subheader"
               subheader={

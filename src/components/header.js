@@ -26,7 +26,7 @@ const Header = () => {
   const navLinks = [
     { label: "Accueil", path: "/home" },
     { label: "Articles", path: "/blog" },
-    { label: "Boutique", path: "/shop", external: true, url: "http://2024digital04.tohme.fr/" },
+    { label: "Boutique", path: "/", external: true, url: "http://2024digital04.tohme.fr/" },
     { label: "Dons", path: "/donation" },
   ];
 
@@ -65,7 +65,7 @@ const Header = () => {
             component="img"
             src={logo}
             alt="Un jour de paix logo"
-            sx={{ width: 100, objectFit: "cover", bgcolor: "#7ED957",fontFamily: '"Alice", serif'}}
+            sx={{ width: 100, objectFit: "cover", bgcolor: "#7ED957",fontFamily: '"Alice", serif', display:{xs:"none"}}}
           />
           <Typography variant="h6" sx={{ color: "#7ED957", ml: 4 }}>
             UnJourDePaix
