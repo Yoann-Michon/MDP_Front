@@ -35,7 +35,7 @@ const Blog = () => {
 
   const handleCreateBlog = async () => {
     try {
-      await fetch("https://mdp-back.onrender.com//blog", {
+      await fetch("https://mdp-back.onrender.com/blog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const Blog = () => {
 
   const handleDeleteBlog = async (id) => {
     try {
-      await fetch(`https://mdp-back.onrender.com//blog/${id}`, {
+      await fetch(`https://mdp-back.onrender.com/blog/${id}`, {
         method: "DELETE",
       });
       fetchArticles();

@@ -10,13 +10,15 @@ import {
   CardContent,
 } from "@mui/material";
 import DonationCards from "../components/DonationCards";
-import te from "../assets/img/test.jpg";
 import dana from "../assets/avatars/dana.svg";
 import ornella from "../assets/avatars/ornella.svg";
 import ines from "../assets/avatars/ines.svg";
 import yoann from "../assets/avatars/yoann.svg";
 import tiktok from "../assets/img/tiktok_ujdp.jpg";
 import { InstagramEmbed } from "react-social-media-embed";
+import child from "../assets/img/people-watching-ruins-old-city-jerusalem-israel.jpg";
+import people from "../assets/img/emad-el-byed-1kJZm6qV8bE-unsplash.jpg";
+import kid from "../assets/img/photorealistic-kid-refugee-camp.jpg";
 import "./style/home.css";
 
 const Home = () => {
@@ -107,11 +109,12 @@ const Home = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              position: "relative",
             }}
           >
             <Box
               component="img"
-              src={te}
+              src={child}
               alt="First Image"
               sx={{
                 width: "100%",
@@ -119,6 +122,28 @@ const Home = () => {
                 objectFit: "cover",
               }}
             />
+            <Typography
+              variant="caption"
+              sx={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                width: "100%",
+                bgcolor: "rgba(0, 0, 0, 0.5)",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              Source:{" "}
+              <a
+                href="https://www.freepik.com/free-ai-image/people-watching-ruins-old-city-jerusalem-israel_88937765.htm#fromView=search&page=1&position=28&uuid=a8fb9017-e1d9-4c36-97f0-3ac943d9f767"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "white" }}
+              >
+                Freepik
+              </a>
+            </Typography>
           </Box>
           <Box
             sx={{
@@ -128,18 +153,32 @@ const Home = () => {
               alignItems: "center",
               textAlign: "center",
               p: 2,
+              flexDirection: "column",
             }}
           >
             <Typography variant="body1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              facilisis neque id nunc consectetur malesuada. Vestibulum accumsan
-              rhoncus lacinia. Sed nec lectus ac nulla tempus ultricies
-              consectetur vitae massa. Nulla quis porta enim. In eleifend magna
-              vel libero rutrum, vitae aliquet lorem tincidunt. Vivamus
-              dignissim ullamcorper eleifend. Phasellus consectetur eleifend
-              libero ut viverra. Donec venenatis lorem ut odio consequat, ac
-              lacinia diam cursus. Fusce mauris orci, egestas at molestie sit
-              amet, condimentum in elit. Curabitur non tincidunt turpis.
+              En novembre 2023, un accord de cessez-le-feu a été conclu, qui a
+              permis la libération de 86 otages israéliens, 240 prisonniers
+              palestiniens et 24 otages d’origine étrangère. La trêve
+              humanitaire qui a duré 6 jours a également permis l’acheminement
+              de fournitures humanitaires dans la bande de Gaza. Depuis, les
+              agences de l’ONU, dont l’UNICEF, n’ont cessé de demander un
+              cessez-le-feu. En mars 2024, le Conseil de sécurité de l’ONU a
+              adopté une résolution appelant à un cessez-le-feu humanitaire
+              immédiat pendant le mois du ramadan et la libération de tous les
+              otages.
+            </Typography>
+            <Typography variant="body1">
+              <small>
+                Source:{" "}
+                <a
+                  href="https://www.unicef.fr/article/israel-palestine-les-enfants-paient-le-prix-de-la-guerre/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Unicef
+                </a>
+              </small>
             </Typography>
           </Box>
         </Box>
@@ -161,11 +200,12 @@ const Home = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              position: "relative",
             }}
           >
             <Box
               component="img"
-              src={te}
+              src={people}
               alt="Second Image"
               sx={{
                 width: "100%",
@@ -173,6 +213,28 @@ const Home = () => {
                 objectFit: "cover",
               }}
             />
+            <Typography
+              variant="caption"
+              sx={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                width: "100%",
+                bgcolor: "rgba(0, 0, 0, 0.5)",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              Source:{" "}
+              <a
+                href="https://unsplash.com/fr/photos/un-couple-de-personnes-marchant-sur-un-chemin-de-terre-1kJZm6qV8bE"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "white" }}
+              >
+                Unsplash
+              </a>
+            </Typography>
           </Box>
           <Box
             sx={{
@@ -182,18 +244,32 @@ const Home = () => {
               alignItems: "center",
               textAlign: "center",
               p: 2,
+              flexDirection: "column",
             }}
           >
             <Typography variant="body1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              facilisis neque id nunc consectetur malesuada. Vestibulum accumsan
-              rhoncus lacinia. Sed nec lectus ac nulla tempus ultricies
-              consectetur vitae massa. Nulla quis porta enim. In eleifend magna
-              vel libero rutrum, vitae aliquet lorem tincidunt. Vivamus
-              dignissim ullamcorper eleifend. Phasellus consectetur eleifend
-              libero ut viverra. Donec venenatis lorem ut odio consequat, ac
-              lacinia diam cursus. Fusce mauris orci, egestas at molestie sit
-              amet, condimentum in elit. Curabitur non tincidunt turpis.
+              En mars 2024, le Conseil de sécurité de l'ONU a adopté une
+              résolution appelant à un cessez-le-feu humanitaire immédiat
+              pendant le mois du ramadan et la libération de tous les otages. La
+              situation dans la bande de Gaza est critique depuis plus de six
+              mois, avec une escalade de violence qui a causé la mort de plus de
+              35 800 personnes, dont plus de 14 100 enfants et 9 000 femmes.
+              Plus de 80 000 personnes ont été blessées, dont 12 300 enfants, et
+              des milliers d'autres sont portées disparues. Les femmes et les
+              enfants représentent 70 % des victimes, avec un enfant blessé ou
+              tué toutes les dix minutes.
+            </Typography>
+            <Typography variant="body1">
+              <small>
+                Source:{" "}
+                <a
+                  href="https://www.unicef.fr/article/israel-palestine-les-enfants-paient-le-prix-de-la-guerre/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Unicef
+                </a>
+              </small>
             </Typography>
           </Box>
         </Box>
@@ -211,11 +287,11 @@ const Home = () => {
           flexDirection: "column",
           alignItems: "center",
           textAlign: "center",
-          p: 2,
           mb: 4,
+          position: "relative",
         }}
       >
-        <Typography variant="body1" sx={{ maxWidth: "700px", mb: 5 }}>
+        <Typography variant="body1" sx={{ maxWidth: "700px", mt: 5 }}>
           Notre mission est de soutenir la population palestinienne en
           fournissant une plateforme inclusive et des ressources financières par
           le biais de notre association. Nous utilisons site pour informer,
@@ -224,18 +300,45 @@ const Home = () => {
           à des projets soutenant la cause palestinienne. La transparence et la
           mobilisation communautaire sont au cœur de notre approche.
         </Typography>
-        {/*https://unsplash.com/fr/photos/un-groupe-de-femmes-debout-les-unes-a-cote-des-autres-Br9WoY9YufU*/}
+
         <Box
-          component="img"
-          src={te}
-          alt="Second Image"
-          sx={{
-            maxWidth: "100%",
-            height: "300px",
-            objectFit: "cover",
-          }}
-        />
+          sx={{ position: "relative", width: "100%", maxWidth: "700px", my: 2 }}
+        >
+          <Box
+            component="img"
+            src={kid}
+            alt="Second Image"
+            sx={{
+              width: "100%",
+              height: "300px",
+              objectFit: "cover",
+            }}
+          />
+          <Typography
+            variant="caption"
+            sx={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              bgcolor: "rgba(0, 0, 0, 0.5)",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            Source:{" "}
+            <a
+              href="https://www.freepik.com/free-ai-image/photorealistic-kid-refugee-camp_187202697.htm#query=gaza%20child&position=1&from_view=keyword&track=ais_user&uuid=0adcc469-fc0a-484b-af7f-f8d70c8d271f"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "white" }}
+            >
+              Freepik
+            </a>
+          </Typography>
+        </Box>
       </Box>
+
       <Divider sx={{ my: 3 }}>
         <Chip
           label="Notre équipe"
@@ -345,7 +448,6 @@ const Home = () => {
           </a>
         </Box>
       </Container>
-      ;
     </div>
   );
 };
