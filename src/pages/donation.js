@@ -40,7 +40,7 @@ const Donation = () => {
       text: "Offrir un soutien psychologique aux enfants traumatisés par la violence",
     },
     {
-      icon: <AddBusinessIcon sx={{ color: "#4CAF50", fontSize: 40 }} />,
+      icon: <AddBusinessIcon sx={{ color: "#7ED957", fontSize: 40 }} />,
       text: "Réhabiliter des infrastructures essentielles comme les écoles et les hôpitaux",
     },
     {

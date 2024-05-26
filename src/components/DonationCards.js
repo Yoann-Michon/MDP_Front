@@ -8,24 +8,24 @@ const donationData = [
   {
     title: "Lever de Fonds",
     description: "Contribuez à nos campagnes de lever de fonds pour soutenir divers projets humanitaires.",
-    icon: <VolunteerActivismIcon sx={{ fontSize: 80, color: 'success.main' }} />,
+    icon: <VolunteerActivismIcon sx={{ fontSize: 80, color: '#7ED957' }} />,
   },
   {
     title: "Colis de Nourriture",
     description: "Aidez-nous à distribuer des colis de nourriture aux familles dans le besoin.",
-    icon: <RestaurantIcon sx={{ fontSize: 80, color: 'success.main' }} />,
+    icon: <RestaurantIcon sx={{ fontSize: 80, color: '#7ED957' }} />,
   },
   {
     title: "Volontaire",
     description: "Rejoignez-nous en tant que volontaire et participez activement à nos actions humanitaires.",
-    icon: <Diversity3Icon sx={{ fontSize: 80, color: 'success.main' }} />,
+    icon: <Diversity3Icon sx={{ fontSize: 80, color: '#7ED957' }} />,
   },
 ];
 
 const DonationCards = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <Box sx={{ backgroundColor: "#4CAF50", width: "100%", textAlign: "center", py: 3 }}>
+      <Box sx={{ backgroundColor: "#7ED957", width: "100%", textAlign: "center", py: 3 }}>
         <Typography variant="h4" gutterBottom sx={{ color: "#FFFFFF" }}>
           Nous sommes une ONG caritative à but non lucratif.
         </Typography>

@@ -26,7 +26,7 @@ const Header = () => {
   const navLinks = [
     { label: "Accueil", path: "/home" },
     { label: "Articles", path: "/blog" },
-    { label: "Boutique", path: "/shop" },
+    { label: "Boutique", path: "/shop", external: true, url: "http://2024digital04.tohme.fr/" },
     { label: "Dons", path: "/donation" },
   ];
 
@@ -65,16 +65,23 @@ const Header = () => {
             component="img"
             src={logo}
             alt="Un jour de paix logo"
-            sx={{ width: 100, objectFit: "cover", bgcolor: "#4CAF50" }}
+            sx={{ width: 100, objectFit: "cover", bgcolor: "#7ED957",fontFamily: '"Alice", serif'}}
           />
-          <Typography variant="h6" sx={{ color: "#4CAF50", ml: 4 }}>
+          <Typography variant="h6" sx={{ color: "#7ED957", ml: 4 }}>
             UnJourDePaix
           </Typography>
         </Box>
         
         <Box sx={{ display: { xs: "none", md: "flex" }, flexGrow: 1, maxWidth: "500px",justifyContent:"space-around"}}>
-          {navLinks.map((link, index) => (
-            <Button key={index} color="info" component={NavLink} to={link.path}>
+        {navLinks.map((link, index) => (
+            <Button 
+              key={index} 
+              component={link.external ? 'a' : NavLink} 
+              href={link.external ? link.url : null} 
+              target={link.external ? "_blank" : null}
+              to={link.path} 
+              sx={{color:"#7ED957"}}
+            >
               {link.label}
             </Button>
           ))}
@@ -83,7 +90,7 @@ const Header = () => {
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
           <IconButton
             edge="start"
-            color="#4CAF50"
+            color="#7ED957"
             aria-label="menu"
             onClick={toggleDrawer(true)}
           >

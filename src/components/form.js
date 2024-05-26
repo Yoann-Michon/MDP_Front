@@ -12,15 +12,9 @@ import logo from "./../assets/img/Ujdp_Logo.svg";
 
 const Form = () => {
   const [reason, setReason] = React.useState("");
-  const [orderNumber, setOrderNumber] = React.useState("");
-  const isOrderSelected = reason === "commande";
 
   const handleChange = (event) => {
     setReason(event.target.value);
-  };
-
-  const handleOrderNumberChange = (event) => {
-    setOrderNumber(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -56,9 +50,10 @@ const Form = () => {
             mb: { xs: 4, md: 0 },
             width: { xs: "100%", md: 500 },
             height: 500,
+            borderRadius: "50%", margin: "20px"
           }}
         >
-          <img src={logo} alt="logo" style={{ width: 200, height: 200 }} />
+          <img src={logo} alt="logo" style={{ width: 200, height: 200}} />
           <Typography variant="h6" component="div" sx={{ mt: 2 }}>
             123 Rue de l'Exemple, 75000 Paris, France
           </Typography>
@@ -102,24 +97,10 @@ const Form = () => {
                 >
                   <MenuItem value="question">Question</MenuItem>
                   <MenuItem value="feedback">Feedback</MenuItem>
-                  <MenuItem value="support">Support</MenuItem>
-                  <MenuItem value="commande">Commande</MenuItem>
                   <MenuItem value="other">Autre</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
-            {isOrderSelected && (
-              <Grid item xs={12} md={6}>
-                <TextField
-                  id="orderNumber"
-                  label="Numéro de commande"
-                  variant="standard"
-                  value={orderNumber}
-                  onChange={handleOrderNumberChange}
-                  fullWidth
-                />
-              </Grid>
-            )}
             <Grid item xs={12} md={12}>
               <TextField
                 id="message"
@@ -137,7 +118,7 @@ const Form = () => {
                 color="primary"
                 fullWidth
               >
-                Submit
+                Envoyer
               </Button>
             </Grid>
           </Grid>

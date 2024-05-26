@@ -28,7 +28,7 @@ const Footer = () => {
     { label: "Livraison et retour", path: "/Delivery" },
   ];
   return (
-    <footer style={{ backgroundColor: "#4CAF50"}}>
+    <footer style={{ backgroundColor: "#7ED957"}}>
       <Container>
         <Box
           sx={{

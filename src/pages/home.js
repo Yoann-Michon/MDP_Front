@@ -15,8 +15,10 @@ import dana from "../assets/avatars/dana.svg";
 import ornella from "../assets/avatars/ornella.svg";
 import ines from "../assets/avatars/ines.svg";
 import yoann from "../assets/avatars/yoann.svg";
+import tiktok from "../assets/img/tiktok_ujdp.jpg";
 import { InstagramEmbed } from 'react-social-media-embed';
 import "./style/home.css";
+
 
 const Home = () => {
   const avatars = [
@@ -74,7 +76,7 @@ const Home = () => {
       <Divider sx={{ my: 5 }}>
         <Chip
           label="Situation"
-          sx={{ bgcolor: "#4CAF50", color: "#FFFFFF", fontSize: "20px" }}
+          sx={{ bgcolor: "#7ED957", color: "#FFFFFF", fontSize: "20px" }}
         />
       </Divider>
       <Container
@@ -201,7 +203,7 @@ const Home = () => {
       <Divider sx={{ my: 3 }}>
         <Chip
           label="Notre mission"
-          sx={{ bgcolor: "#4CAF50", color: "#FFFFFF", fontSize: "20px" }}
+          sx={{ bgcolor: "#7ED957", color: "#FFFFFF", fontSize: "20px" }}
         />
       </Divider>
       <Box
@@ -239,7 +241,7 @@ const Home = () => {
       <Divider sx={{ my: 3 }}>
         <Chip
           label="Notre équipe"
-          sx={{ bgcolor: "#4CAF50", color: "#FFFFFF", fontSize: "20px" }}
+          sx={{ bgcolor: "#7ED957", color: "#FFFFFF", fontSize: "20px" }}
         />
       </Divider>
 
@@ -295,18 +297,21 @@ const Home = () => {
           Envie de rejoindre l'équipe ?
         </Typography>
         <Box sx={{display: 'flex', justifyContent: 'space-around',minWidth:400, width:"100%", alignItems:"center",flexDirection:{xs: "column", md: "row"}}}>
-          <InstagramEmbed url="https://www.instagram.com/p/CUbHfhpswxt/" style={{maxWidth:"400px",width:"100%"}} />
-          <blockquote className="tiktok-embed" cite="https://www.tiktok.com/@epicgardening/video/7055411162212633903" data-video-id="7055411162212633903" id="v88922974113346340" style={{ height: "625px", width: "323px", margin: "0" }}>
-  <iframe
-    title="TikTok Video"
-    name="__tt_embed__v88922974113346340"
-    sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-top-navigation allow-same-origin"
-    src="https://www.tiktok.com/embed/v2/7055411162212633903"
-    style={{ "visibility": "unset" }}
-  ></iframe>
-</blockquote>
-
-        </Box>
+          <InstagramEmbed url="https://www.instagram.com/p/C68MGQbNtdj/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" style={{maxWidth:"400px",width:"100%", aspectRatio: 1}} />
+          <a href="https://www.tiktok.com/@_unjourdepaix?_t=8mfW2K3MuRt&_r=1" target="_blank" rel="noopener noreferrer">
+          <Box
+          component="img"
+          src={tiktok}
+          alt="tiktok account image"
+          sx={{
+            maxWidth: "400px",
+            width:"100%",
+            border:"1px solid #80808075",
+            objectFit: "cover",
+          }}
+        />
+        </a>
+      </Box>
       </Container>
     </div>
   );
