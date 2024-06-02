@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Box, Typography } from "@mui/material";
 
 const CheckoutForm = () => {
+  // Utilisation des hooks de Stripe
   const stripe = useStripe();
   const elements = useElements();
 
+  // États pour stocker les données du formulaire et les messages d'erreur et de succès
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    amount: ""
+    amount: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
+  // Fonction de gestion de la saisie utilisateur dans les champs de formulaire
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -21,35 +26,51 @@ const CheckoutForm = () => {
     });
   };
 
+  // Fonction pour gérer les clics sur les boutons de montant
   const handleButtonClick = (amount) => {
     setFormData({
       ...formData,
-      amount: amount
+      amount: amount,
     });
   };
 
+  // Fonction pour soumettre le formulaire
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    // Vérification de la disponibilité de Stripe et des éléments
+    if (!stripe || !elements) {
+      return;
+    }
 
     try {
+      // Création d'une méthode de paiement avec Stripe
       const { paymentMethod, error } = await stripe.createPaymentMethod({
         type: "card",
         card: elements.getElement(CardElement),
+        billing_details: {
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+        },
       });
 
+      // Gestion des erreurs
       if (error) {
-        console.error("Error creating PaymentMethod:", error);
+        setErrorMessage(error.message);
         return;
       }
 
-      const response = await fetch("https://mdp-back.onrender.com/stripe/donation", {
+      // Envoi des données de paiement au serveur
+      const response = await fetch("http://localhost:4000/stripe/donation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           paymentMethodId: paymentMethod.id,
-          amount: formData.amount * 100, 
+          amount: formData.amount * 100, // Conversion en centimes
           currency: "eur",
           firstName: formData.firstName,
           lastName: formData.lastName,
@@ -57,11 +78,19 @@ const CheckoutForm = () => {
         }),
       });
 
+      // Traitement de la réponse
+      if (response.ok) {
+          setSuccessMessage("Paiement réussi ! Merci pour votre don.");
+        } else {
+          setErrorMessage("Erreur lors de la transaction. Veuillez réessayer.");
+        }
+
     } catch (error) {
-      console.error("Error:", error);
+      setErrorMessage("Une erreur est survenue. Veuillez réessayer.");
     }
   };
 
+  // Rendu du formulaire de paiement
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", maxWidth: "500px" }}>
       <TextField
@@ -72,57 +101,18 @@ const CheckoutForm = () => {
         onChange={handleInputChange}
         margin="normal"
       />
-      <div style={{ display: "flex", justifyContent: "space-between", margin: "15px 0" }}>
-        <Button
-          variant="contained"
-          style={{ backgroundColor: "#7ED957", color: "#FFFFFF" }}
-          onClick={() => handleButtonClick(10)}
-        >
+      <Box sx={{ display: "flex", justifyContent: "space-between", margin: "15px 0" }}>
+        <Button variant="contained" style={{ backgroundColor: "#7ED957", color: "#FFFFFF" }} onClick={() => handleButtonClick(10)}>
           10 EUR
         </Button>
-        <Button
-          variant="contained"
-          style={{ backgroundColor: "#7ED957", color: "#FFFFFF" }}
-          onClick={() => handleButtonClick(5)}
-        >
+        <Button variant="contained" style={{ backgroundColor: "#7ED957", color: "#FFFFFF" }} onClick={() => handleButtonClick(5)}>
           5 EUR
         </Button>
-        <Button
-          variant="contained"
-          style={{ backgroundColor: "#7ED957", color: "#FFFFFF" }}
-          onClick={() => handleButtonClick(15)}
-        >
+        <Button variant="contained" style={{ backgroundColor: "#7ED957", color: "#FFFFFF" }} onClick={() => handleButtonClick(15)}>
           15 EUR
         </Button>
-      </div>
-      <CardElement
-        options={{
-          hidePostalCode: true,
-          appearance: {
-            theme: 'stripe',
-            variables: {
-              colorPrimary: '#0570de',
-              colorBackground: '#ffffff',
-              colorText: '#30313d',
-              colorDanger: '#df1b41',
-              fontFamily: 'Ideal Sans, system-ui, sans-serif',
-              spacingUnit: '2px',
-              borderRadius: '4px',
-            },
-            rules: {
-              '.Input': {
-                borderRadius: '4px',
-                border: '1px solid #e0e0e0',
-                padding: '10px',
-              },
-              '.Label': {
-                fontSize: '16px',
-                fontWeight: '500',
-              },
-            },
-          },
-        }}
-      />
+      </Box>
+      <CardElement options={{ hidePostalCode: true }} />
       <TextField
         label="Prénom"
         name="firstName"
@@ -145,13 +135,9 @@ const CheckoutForm = () => {
         onChange={handleInputChange}
         margin="normal"
       />
-      
-      <Button
-        variant="contained"
-        color="primary"
-        type="submit"
-        style={{ marginTop: "16px" }}
-      >
+      {errorMessage && <Typography color="error">{errorMessage}</Typography>}
+      {successMessage && <Typography color="primary">{successMessage}</Typography>}
+      <Button variant="contained" color="primary" type="submit" style={{ marginTop: "16px" }}>
         Faire un don
       </Button>
     </form>

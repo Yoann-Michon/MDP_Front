@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -11,17 +11,14 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import logo from "./../assets/img/Ujdp_Logo.svg";
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const location = useLocation();
-
-  const isShopPage = location.pathname === "/shop";
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const navLinks = [
     { label: "Accueil", path: "/home" },
@@ -30,10 +27,15 @@ const Header = () => {
       label: "Boutique",
       path: "/shop",
       external: true,
-      url: "http://2024digital04.tohme.fr/",
+      url: "https://unjourdepaix.myshopify.com/",
     },
     { label: "Dons", path: "/donation" },
   ];
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -43,6 +45,12 @@ const Header = () => {
       return;
     }
     setDrawerOpen(open);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/home");
   };
 
   const drawerList = (
@@ -65,6 +73,15 @@ const Header = () => {
             <ListItemText primary={link.label} />
           </ListItem>
         ))}
+        {isLoggedIn ? (
+          <ListItem button onClick={handleLogout}>
+            <ListItemText primary="Déconnexion" />
+          </ListItem>
+        ) : (
+          <ListItem button component={NavLink} to="/login">
+            <ListItemText primary="Connexion" />
+          </ListItem>
+        )}
       </List>
     </Box>
   );
@@ -76,21 +93,19 @@ const Header = () => {
     >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Link to="/home">
-          <Box
-            component="img"
-            src={logo}
-            alt="Un jour de paix logo"
-            sx={{
-              width: 100,
-              objectFit: "cover",
-              bgcolor: "#7ED957",
-              fontFamily: '"Alice", serif',
-              display: { xs: "none", md: "flex" },
-            }}
-          />
-          </Link>
-          <Link to="/login" style={{ textDecoration: "none" }}>
+            <Box
+              component="img"
+              src={logo}
+              alt="Un jour de paix logo"
+              sx={{
+                width: 100,
+                objectFit: "cover",
+                bgcolor: "#7ED957",
+                fontFamily: '"Alice", serif',
+                display: { xs: "none", md: "flex" },
+              }}
+            />
+              <Link to="/home" style={{ textDecoration: "none" }}>
             <Typography
               variant="h6"
               sx={{
@@ -124,6 +139,15 @@ const Header = () => {
               {link.label}
             </Button>
           ))}
+          {isLoggedIn ? (
+            <Button onClick={handleLogout} sx={{ color: "#7ED957" }}>
+              Déconnexion
+            </Button>
+          ) : (
+            <Button component={NavLink} to="/login" sx={{ color: "#7ED957" }}>
+              Connexion
+            </Button>
+          )}
         </Box>
 
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -138,25 +162,6 @@ const Header = () => {
             {drawerList}
           </Drawer>
         </Box>
-
-        {isShopPage && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              margin: 0,
-              width: 100,
-            }}
-          >
-            <IconButton size="large" aria-label="search" color="info">
-              <SearchIcon />
-            </IconButton>
-            <IconButton size="large" aria-label="shoppingBag" color="info">
-              <ShoppingCartIcon />
-            </IconButton>
-          </Box>
-        )}
       </Toolbar>
     </AppBar>
   );

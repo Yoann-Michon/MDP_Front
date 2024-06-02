@@ -64,7 +64,6 @@ const Blog = () => {
   };
 
   const handleUpdateBlog = async (id) => {
-    console.log(id);
     try {
       await fetch(`http://localhost:4000/blog/${id}`, {
         method: "PATCH",

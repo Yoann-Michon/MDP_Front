@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Typography,
   Box,
-  Link,
+  Button,
+  Modal,
   List,
   ListItem,
   ListItemIcon,
@@ -20,6 +21,11 @@ import PinDropIcon from "@mui/icons-material/PinDrop";
 import StripeContainer from "../components/stripe/stripeContainer";
 
 const Donation = () => {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+
   const carousel = [
     {
       url: aImage,
@@ -109,13 +115,13 @@ const Donation = () => {
           </Typography>
           <Typography variant="body1">
             En ligne :{" "}
-            <Link href="/" sx={{ color: "primary.main" }}>
-              Faire un don en ligne
-            </Link>{" "}
+            <Button onClick={handleOpenModal}>
+              Faire un don
+            </Button>
           </Typography>
           <Box component="section" id="postal_add" sx={{ my: 3 }}>
             <Typography variant="body1" sx={{ mt: 3 }}>
-              Via des denrées alimentaires a l'adresse postale suivante :
+              Via des denrées alimentaires à l'adresse postale suivante :
             </Typography>
             <List>
               <ListItem>
@@ -137,12 +143,42 @@ const Donation = () => {
               </ListItem>
             </List>
           </Box>
-          <StripeContainer />
           <Typography variant="body1" sx={{ my: 3 }}>
             Merci infiniment pour votre générosité et votre soutien !
           </Typography>
         </Box>
       </Box>
+
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-title" variant="h6" component="h2">
+            Formulaire de Paiement
+          </Typography>
+          <Typography id="modal-description" sx={{ mt: 2 }}>
+            <StripeContainer />
+          </Typography>
+          <Button onClick={handleCloseModal} sx={{ mt: 2, color:"#7ed957"}}>
+            Fermer
+          </Button>
+        </Box>
+      </Modal>
     </Container>
   );
 };

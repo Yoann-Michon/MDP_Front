@@ -9,6 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import { UserContext } from "./../userRole";
+import { Button } from "@mui/material";
+import { Navigate } from "react-router-dom";
 
 
 export default function AccountMenu() {
@@ -80,7 +82,9 @@ export default function AccountMenu() {
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
+          <Button onClick={()=>{localStorage.removeItem("token");Navigate("/home")}}>
           Logout
+          </Button>
         </MenuItem>
       </Menu>
     </React.Fragment>

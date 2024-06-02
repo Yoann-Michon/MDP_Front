@@ -10,7 +10,7 @@ import {
   CardActions,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 
 const Shop = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -32,9 +32,9 @@ const Shop = () => {
     }
   };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  //useEffect(() => {
+  //  fetchProducts();
+  //}, []);
 
   const fetchProducts = async () => {
     try {
@@ -94,7 +94,6 @@ const Shop = () => {
         locationImg: "",
       });
   
-      console.log(updatedProduct);
     } catch (error) {
       console.error("Error creating product:", error);
     }
@@ -106,7 +105,6 @@ const Shop = () => {
       await fetch(`https://mdp-back.onrender.com/products/${id}`, {
         method: "DELETE",
       });
-      console.log(id)
       fetchProducts();
     } catch (error) {
       console.error("Error deleting product:", error);

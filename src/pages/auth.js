@@ -1,40 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from "./../userRole";
 
 const Auth = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
-  const {userRole} = useContext(UserContext)
-
-
-  //const createUser = async () => {
-  //  const response = await fetch('http://localhost:4000/auth/register', {
-  //    method: 'POST',
-  //    headers: {
-  //      'Content-Type': 'application/json',
-  //    },
-  //    body: JSON.stringify({
-  //      username: 'test',
-  //      password: 'test1234',
-  //      role: 'user'  // or 'admin'
-  //    }),
-  //  });
-  //
-  //  if (response.ok) {
-  //    const data = await response.json();
-  //    console.log('Utilisateur créé avec succès:', data);
-  //  } else {
-  //    console.error('Erreur lors de la création de l\'utilisateur');
-  //  }
-  //};
-  //
-  //// Appelez la fonction pour créer un utilisateur
-  //createUser();
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,10 +22,6 @@ const Auth = () => {
         const data = await response.json();
         const token = data.access_token;
         localStorage.setItem('token', token);
-
-        // rediriger vers la page admin ou utilisateur
-        const redirection = userRole === 'admin' ? '/dashboard' : '/user';
-        navigate(redirection);
       } else {
         setError('Identifiants incorrects');
       }
