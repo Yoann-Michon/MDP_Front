@@ -10,7 +10,7 @@ const Auth = () => {
     event.preventDefault();
     setError('');
     try {
-      const response = await fetch('http://localhost:4000/auth/login', {
+      const response = await fetch('https://mdp-back.onrender.com/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

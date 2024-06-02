@@ -63,7 +63,7 @@ const CheckoutForm = () => {
       }
 
       // Envoi des données de paiement au serveur
-      const response = await fetch("http://localhost:4000/stripe/donation", {
+      const response = await fetch("https://mdp-back.onrender.com/stripe/donation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
