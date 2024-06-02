@@ -17,6 +17,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import PinDropIcon from "@mui/icons-material/PinDrop";
+import StripeContainer from "../components/stripe/stripeContainer";
 
 const Donation = () => {
   const carousel = [
@@ -136,7 +137,7 @@ const Donation = () => {
               </ListItem>
             </List>
           </Box>
-
+          <StripeContainer />
           <Typography variant="body1" sx={{ my: 3 }}>
             Merci infiniment pour votre générosité et votre soutien !
           </Typography>

@@ -11,7 +11,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -26,7 +26,12 @@ const Header = () => {
   const navLinks = [
     { label: "Accueil", path: "/home" },
     { label: "Articles", path: "/blog" },
-    { label: "Boutique", path: "/shop", external: true, url: "http://2024digital04.tohme.fr/" },
+    {
+      label: "Boutique",
+      path: "/shop",
+      external: true,
+      url: "http://2024digital04.tohme.fr/",
+    },
     { label: "Dons", path: "/donation" },
   ];
 
@@ -52,7 +57,7 @@ const Header = () => {
           <ListItem
             button
             key={index}
-            component={link.external ? 'a' : NavLink}
+            component={link.external ? "a" : NavLink}
             href={link.external ? link.url : null}
             target={link.external ? "_blank" : null}
             to={link.path}
@@ -65,25 +70,52 @@ const Header = () => {
   );
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "transparent", padding: "0 20px" }}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "transparent", padding: "0 20px" }}
+    >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Link to="/home">
           <Box
             component="img"
             src={logo}
             alt="Un jour de paix logo"
-            sx={{ width: 100, objectFit: "cover", bgcolor: "#7ED957", fontFamily: '"Alice", serif', display: { xs: "none" } }}
+            sx={{
+              width: 100,
+              objectFit: "cover",
+              bgcolor: "#7ED957",
+              fontFamily: '"Alice", serif',
+              display: { xs: "none", md: "flex" },
+            }}
           />
-          <Typography variant="h6" sx={{ color: "#7ED957", ml: 4 }}>
-            UnJourDePaix
-          </Typography>
+          </Link>
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: "#7ED957",
+                ml: 4,
+                display: { xs: "none", md: "flex" },
+              }}
+            >
+              UnJourDePaix
+            </Typography>
+          </Link>
         </Box>
 
-        <Box sx={{ display: { xs: "none", md: "flex" }, flexGrow: 1, maxWidth: "500px", justifyContent: "space-around" }}>
+        <Box
+          sx={{
+            display: { xs: "none", md: "flex" },
+            flexGrow: 1,
+            maxWidth: "500px",
+            justifyContent: "space-around",
+          }}
+        >
           {navLinks.map((link, index) => (
             <Button
               key={index}
-              component={link.external ? 'a' : NavLink}
+              component={link.external ? "a" : NavLink}
               href={link.external ? link.url : null}
               target={link.external ? "_blank" : null}
               to={link.path}

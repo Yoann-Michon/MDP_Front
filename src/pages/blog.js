@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Button,
   Modal,
@@ -8,34 +8,47 @@ import {
   Card,
   CardContent,
   CardActions,
-  Grid
+  Grid,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import { UserContext } from "./../userRole";
+import CircularIndeterminate from "./../components/loader";
 
 const Blog = () => {
   const [articles, setArticles] = useState([]);
   const [newBlogUrl, setNewBlogUrl] = useState("");
   const [openModal, setOpenModal] = useState(false);
-  const isAdmin = localStorage.getItem("role") === "Admin";
-
+  const [editMode, setEditMode] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const { userRole } = useContext(UserContext);
+  const isAdmin = userRole === "admin";
+  const [articleTitle, setArticleTitle] = useState("");
+  const [articleImage, setArticleImage] = useState("");
+  const [articleContent, setArticleContent] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchArticles();
   }, []);
 
   const fetchArticles = async () => {
+    setIsLoading(true);
     try {
-      const response = await fetch("https://mdp-back.onrender.com/blog");
+      const response = await fetch("http://localhost:4000/blog");
       const data = await response.json();
       setArticles(data);
     } catch (error) {
       console.error("Error fetching data:", error);
+    }finally{
+      setIsLoading(false);
     }
   };
 
   const handleCreateBlog = async () => {
     try {
-      await fetch("https://mdp-back.onrender.com/blog", {
+      await fetch("http://localhost:4000/blog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,15 +58,40 @@ const Blog = () => {
       fetchArticles();
       setNewBlogUrl("");
       setOpenModal(false);
-      console.log(newBlogUrl);
     } catch (error) {
       console.error("Error creating blog:", error);
     }
   };
 
+  const handleUpdateBlog = async (id) => {
+    console.log(id);
+    try {
+      await fetch(`http://localhost:4000/blog/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: articleTitle,
+          imageLink: articleImage,
+          content: articleContent,
+        }),
+      });
+      fetchArticles();
+      setArticleTitle("");
+      setArticleImage("");
+      setArticleContent("");
+      setOpenModal(false);
+      setSelectedArticle(null);
+      setEditMode(false);
+    } catch (error) {
+      console.error("Error updating blog:", error);
+    }
+  };
+
   const handleDeleteBlog = async (id) => {
     try {
-      await fetch(`https://mdp-back.onrender.com/blog/${id}`, {
+      await fetch(`http://localhost:4000/blog/${id}`, {
         method: "DELETE",
       });
       fetchArticles();
@@ -62,66 +100,109 @@ const Blog = () => {
     }
   };
 
+  const openEditModal = (article) => {
+    setArticleTitle(article.title);
+    setArticleImage(article.imageLink);
+    setArticleContent(article.content);
+    setSelectedArticle(article);
+    setEditMode(true);
+    setOpenModal(true);
+  };
+
   return (
-    <div className="blog" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh" }}>
+    <div
+      className="blog"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+      }}
+    >
       <Typography variant="h1" component="h1" sx={{ mb: 4 }}>
         Articles
       </Typography>
-      <Grid container spacing={4} justifyContent="center">
+
+      {isLoading ? (<CircularIndeterminate />) :<Grid container spacing={4} justifyContent="center">
         {articles.map((article, index) => (
-          <Grid item key={index} xs={12} sm={6} md={4}>
+          <Grid item key={index} xs={12} sm={6} md={4} px={2}>
             <Card
               sx={{
-                height: "100%",
+                width: "400px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
                 borderRadius: "12px",
               }}
             >
-              <a href={article.link} rel="noopener noreferrer" target="_blank">
+              <Box
+                component="img"
+                src={article.imageLink}
+                alt={`image: ${article.title}`}
+                sx={{
+                  width: "100%",
+                  height: "50%",
+                  objectFit: "cover",
+                }}
+              />
+              <a href={article.link} rel="noopener noreferrer" target="_blank" style={{textDecoration:"none"}}>
                 <CardContent sx={{ textAlign: "center" }}>
-                  <Box sx={{ my: 2 }}>{/*article.image*/}</Box>
                   <Typography variant="h5" component="div">
                     {article.title}
                   </Typography>
-                  {/*<Typography variant="body2" color="text.secondary">
-                    {article.content}
-                  </Typography>*/}
                 </CardContent>
               </a>
               <CardActions>
-                {isAdmin &&(<Button
-                  size="small"
-                  color="secondary"
-                  onClick={() => handleDeleteBlog(article.id)}
-                >
-                  Delete
-                </Button>)}
+                {isAdmin && (
+                  <>
+                    <Button
+                      size="small"
+                      color="secondary"
+                      onClick={() => handleDeleteBlog(article.id)}
+                    >
+                      <DeleteIcon sx={{ color: "#7ED957" }}/>
+                    </Button>
+                    <Button
+                      size="small"
+                      color="secondary"
+                      onClick={() => openEditModal(article)}
+                    >
+                      <EditIcon sx={{ color: "#7ED957" }}/>
+                    </Button>
+                  </>
+                )}
               </CardActions>
             </Card>
           </Grid>
         ))}
-      </Grid>
-      {/*role === 'Admin' && */}
+      </Grid>}
       <>
-      {isAdmin &&(<Button
-          onClick={() => setOpenModal(true)}
-          variant="contained"
-          color="primary"
-          sx={{
-            mt: 4,
-            borderRadius: "50%",
-            width: "60px",
-            height: "60px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+        {isAdmin && (
+          <Button
+            onClick={() => setOpenModal(true)}
+            variant="contained"
+            sx={{
+              mt: 4,
+              borderRadius: "50%",
+              width: "60px",
+              height: "60px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              bgcolor:"#7ED957"
+            }}
+          >
+            <AddIcon />
+          </Button>
+        )}
+        <Modal
+          open={openModal}
+          onClose={() => {
+            setOpenModal(false);
+            setEditMode(false);
           }}
         >
-          <AddIcon />
-        </Button>)}
-        <Modal open={openModal} onClose={() => setOpenModal(false)}>
           <Box
             sx={{
               position: "absolute",
@@ -129,7 +210,7 @@ const Blog = () => {
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: 300,
-              height: 200,
+              height: editMode ? 400 : 200,
               bgcolor: "background.paper",
               boxShadow: 24,
               p: 2,
@@ -141,24 +222,67 @@ const Blog = () => {
             }}
           >
             <Typography id="modal-modal-title" component="h2">
-              Ajouter un nouvel article
+              {editMode ? "Update Article" : "Add New Article"}
             </Typography>
-            <Input
-              type="text"
-              placeholder="URL"
-              value={newBlogUrl}
-              onChange={(e) => setNewBlogUrl(e.target.value)}
-            />
+            {editMode && (
+              <>
+                <Input
+                  type="text"
+                  placeholder="Title"
+                  value={articleTitle}
+                  onChange={(e) => setArticleTitle(e.target.value)}
+                  fullWidth
+                  sx={{ mb: 2 }}
+                />
+                <Input
+                  type="text"
+                  placeholder="Image URL"
+                  value={articleImage}
+                  onChange={(e) => setArticleImage(e.target.value)}
+                  fullWidth
+                  sx={{ mb: 2 }}
+                />
+                <Input
+                  type="text"
+                  placeholder="Content"
+                  value={articleContent}
+                  onChange={(e) => setArticleContent(e.target.value)}
+                  fullWidth
+                  multiline
+                  rows={4}
+                  sx={{ mb: 2 }}
+                />
+              </>
+            )}
+            {!editMode && (
+              <Input
+                type="text"
+                placeholder="URL"
+                value={newBlogUrl}
+                onChange={(e) => setNewBlogUrl(e.target.value)}
+                fullWidth
+                sx={{ mb: 2 }}
+              />
+            )}
             <Box>
               <Button
                 variant="outlined"
                 color="error"
-                onClick={() => setOpenModal(false)}
+                onClick={() => {
+                  setOpenModal(false);
+                  setEditMode(false);
+                }}
                 sx={{ mr: 2 }}
               >
-                Annuler
+                Cancel
               </Button>
-              <Button onClick={handleCreateBlog}>Ajouter</Button>
+              <Button
+                onClick={() =>
+                  editMode ? handleUpdateBlog(selectedArticle.id) : handleCreateBlog()
+                }
+              >
+                {editMode ? "Update" : "Add"}
+              </Button>
             </Box>
           </Box>
         </Modal>

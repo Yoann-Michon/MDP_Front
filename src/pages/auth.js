@@ -1,29 +1,69 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from "./../userRole";
 
 const Auth = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const {userRole} = useContext(UserContext)
+
+
+  //const createUser = async () => {
+  //  const response = await fetch('http://localhost:4000/auth/register', {
+  //    method: 'POST',
+  //    headers: {
+  //      'Content-Type': 'application/json',
+  //    },
+  //    body: JSON.stringify({
+  //      username: 'test',
+  //      password: 'test1234',
+  //      role: 'user'  // or 'admin'
+  //    }),
+  //  });
+  //
+  //  if (response.ok) {
+  //    const data = await response.json();
+  //    console.log('Utilisateur créé avec succès:', data);
+  //  } else {
+  //    console.error('Erreur lors de la création de l\'utilisateur');
+  //  }
+  //};
+  //
+  //// Appelez la fonction pour créer un utilisateur
+  //createUser();
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch('http://localhost:4000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password })});
+    setError('');
+    try {
+      const response = await fetch('http://localhost:4000/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
       if (response.ok) {
-        // Connexion réussie
-        navigate('/blog'); // Rediriger vers le blog
+        const data = await response.json();
+        const token = data.access_token;
+        localStorage.setItem('token', token);
+
+        // rediriger vers la page admin ou utilisateur
+        const redirection = userRole === 'admin' ? '/dashboard' : '/user';
+        navigate(redirection);
       } else {
-        // Gestion de l'échec de connexion
-        console.log('identifiants incorrects');
+        setError('Identifiants incorrects');
       }
-    };
+    } catch (error) {
+      console.error('Erreur lors de la connexion', error);
+      setError('Erreur lors de la connexion');
+    }
+  };
 
   return (
     <Container maxWidth="sm" sx={{ my: 9 }}>
@@ -31,6 +71,11 @@ const Auth = () => {
         <Typography variant="h4" component="h2" gutterBottom>
           Connexion
         </Typography>
+        {error && (
+          <Typography variant="body2" color="error">
+            {error}
+          </Typography>
+        )}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
           <TextField
             label="Nom d'utilisateur"
