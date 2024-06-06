@@ -38,7 +38,7 @@ const Shop = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("https://mdp-back.onrender.com/products");
+      const response = await fetch(`${process.env.BACK_URL}/products`);
       const data = await response.json();
       setProducts(data);
       setOpenModal(false);
@@ -76,7 +76,7 @@ const Shop = () => {
       const updatedProduct = { ...newProduct, locationImg: imgbbData.data.url };
   
       // Envoyer les données du produit au backend
-      await fetch("https://mdp-back.onrender.com/products", {
+      await fetch(`${process.env.URL}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -102,7 +102,7 @@ const Shop = () => {
 
   const handleDeleteProduct = async (id) => {
     try {
-      await fetch(`https://mdp-back.onrender.com/products/${id}`, {
+      await fetch(`${process.env.URL}/products/${id}`, {
         method: "DELETE",
       });
       fetchProducts();

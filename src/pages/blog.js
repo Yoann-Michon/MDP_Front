@@ -36,7 +36,8 @@ const Blog = () => {
   const fetchArticles = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("https://mdp-back.onrender.com/blog");
+      const response = await fetch(`${process.env.REACT_APP_BACK_URL}/blog`);
+      console.log(process.env.REACT_APP_BACK_URL);
       const data = await response.json();
       setArticles(data);
     } catch (error) {
@@ -48,7 +49,7 @@ const Blog = () => {
 
   const handleCreateBlog = async () => {
     try {
-      await fetch("https://mdp-back.onrender.com/blog", {
+      await fetch(`${process.env.REACT_APP_BACK_URL}/blog`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +66,7 @@ const Blog = () => {
 
   const handleUpdateBlog = async (id) => {
     try {
-      await fetch(`https://mdp-back.onrender.com/blog/${id}`, {
+      await fetch(`${process.env.REACT_APP_BACK_URL}/blog/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +91,7 @@ const Blog = () => {
 
   const handleDeleteBlog = async (id) => {
     try {
-      await fetch(`https://mdp-back.onrender.com/blog/${id}`, {
+      await fetch(`${process.env.REACT_APP_BACK_URL}/blog/${id}`, {
         method: "DELETE",
       });
       fetchArticles();
